@@ -29,12 +29,25 @@ class LinkedList():
         return count
     
     def middle_node(self):
+        # O(n) complejidad de tiempo
+        # Vamos a recorrer el numero de veces la mitad de la linked list, cuando lleguemos al final, el nodo estará en el medio
         current_node = self.head
         middle_node = self.get_lenght() // 2
         while middle_node > 0:
             current_node = current_node.get_next()
             middle_node -= 1
         return current_node.get_data()
+    
+    def middle_node_2_pointers(self):
+        # O(n) complejidad de tiempo
+        # Vamos a usar dos punteros, uno para recorrer la lista y otro para ir avanzando en la lista, cuando el puntero rapido llegue al final, el puntero lento estará en el medio
+        slow_pointer = self.head
+        fast_pointer = self.head
+        while fast_pointer and fast_pointer.get_next():
+            slow_pointer = slow_pointer.get_next()
+            fast_pointer = fast_pointer.get_next().get_next()
+        return slow_pointer.get_data()
+            
     
 
 
@@ -72,4 +85,4 @@ node_m.set_next(new_next=node_n)
 node_n.set_next(new_next=node_o)
 node_o.set_next(new_next=None)
 
-print(linked_list.middle_node())
+print(linked_list.middle_node_2_pointers())
